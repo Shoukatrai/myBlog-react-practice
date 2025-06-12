@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { toastAlert } from '../../utils/toastAlert';
-
+import { useState } from "react"
 
 const SignUp = () => {
     const [fname, setFname] = useState("")
@@ -13,6 +13,7 @@ const SignUp = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+
 
 
 
@@ -26,14 +27,20 @@ const SignUp = () => {
 
 
             if (user) {
-                const obj = {
-                    fname,
-                    contactNbr,
-                    email,
-                    userId
+                try {
+
+                    const obj = {
+                        fname,
+                        contactNbr,
+                        email,
+                        userId
+                    }
+
+                    const docRef = await addDoc(collection(db, "users"), obj);
+                    console.log("docRef", docRef)
+                } catch (error) {
+                    console.log("error" , error)
                 }
-                const docRef = await addDoc(collection(db, "users"), obj);
-                console.log("docRef", docRef)
             }
             toastAlert({
                 type: "success",

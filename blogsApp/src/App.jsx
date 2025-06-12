@@ -5,6 +5,8 @@ import Login from './pages/auth/Login'
 import SignUp from './pages/auth/SignUp'
 import BlogPage from './pages/BlogPage'
 import { Bounce, ToastContainer } from 'react-toastify'
+import CreateBlog from './pages/CreateBlog'
+import MyBlogs from './pages/MyBlogs'
 
 function App() {
 
@@ -13,7 +15,9 @@ function App() {
       <Routes>
         <Route index element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/blogpage' element={<BlogPage />} />
+        <Route path='/blogs' element={<BlogPage />} />
+        <Route path='/createblog' element={<CreateBlog />} />
+        <Route path='/myblogs' element={<MyBlogs />} />
       </Routes>
 
       <ToastContainer

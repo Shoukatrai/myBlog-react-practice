@@ -1,13 +1,13 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 
-const BlogPage = () => {
+const MyBlogs = () => {
   return (
     <>
-    <Navbar />
-       BlogPage 
+      <Navbar />
+      MyBlogs
     </>
   )
 }
 
-export default BlogPage
+export default MyBlogs
