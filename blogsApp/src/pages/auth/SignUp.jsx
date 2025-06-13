@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { toastAlert } from '../../utils/toastAlert';
-import { useState  } from "react"
+import { useState } from "react"
 
 const SignUp = () => {
     const [fname, setFname] = useState("")
@@ -13,7 +13,7 @@ const SignUp = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
-    
+
     const navigate = useNavigate()
 
 
@@ -21,6 +21,13 @@ const SignUp = () => {
 
     const signUpHandler = async () => {
         try {
+            if(!email || !password || !fname || !contactNbr){
+                toastAlert({
+                    type: "warning",
+                    message: "Fill All the Fields!"
+                })
+                return
+            }
             setIsLoading(true)
             const user = await createUserWithEmailAndPassword(auth, email, password)
             console.log("user", user.user)
@@ -41,7 +48,7 @@ const SignUp = () => {
                     const docRef = await addDoc(collection(db, "users"), obj);
                     console.log("docRef", docRef)
                 } catch (error) {
-                    console.log("error" , error)
+                    console.log("error", error)
                 }
             }
             toastAlert({
@@ -63,7 +70,12 @@ const SignUp = () => {
 
     return (
         <>
-            <Stack padding={5} borderRadius={5} margin={"20px auto"} gap={4} width={"50%"} textAlign={"center"} sx={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px" }} >
+            <Stack padding={5} borderRadius={5} margin={"20px auto"} gap={4} width={"50%"} textAlign={"center"} sx={{
+                boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px",
+                width: { xs: "90%", md: "50%" },
+                p: { xs: 2, sm: 4 },
+                borderRadius: 3,
+            }} >
                 <Typography variant='h4' >Create Account</Typography>
                 <TextField
                     variant='outlined'

@@ -16,7 +16,7 @@ const Login = () => {
     const loginHandler = async () => {
         if (!email || !password) {
             toastAlert({
-                type: "error",
+                type: "warning",
                 message: "Please enter email and password."
             });
             return;
@@ -44,12 +44,11 @@ const Login = () => {
 
     return (
         <>
-            <Stack  gap={4} textAlign={"center"} sx={{
+            <Stack gap={4} textAlign={"center"} margin={"30px auto"} sx={{
                 boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px",
-                width: { xs: "100%", md: "50%" },
-                margin:{ xs: "30px 20px", md: "50px auto" },
-                borderRadius: "15px",
-                padding: "20px"
+                width: { xs: "90%", md: "50%" },
+                p: { xs: 2, sm: 4 },
+                borderRadius: 3,
             }} >
                 <Typography variant='h4'>Welcome Back!</Typography>
 
@@ -73,9 +72,9 @@ const Login = () => {
                     <Link to={"/signup  "} >Create Account</Link>
                 </Typography>
                 <Button variant='contained' onClick={loginHandler} >
-                    {isLoading ? "Logging in" : "Login"}
+                    {isLoading ? "Logging in..." : "Login"}
                 </Button>
-            </Stack>
+            </Stack >
         </>
     )
 }
