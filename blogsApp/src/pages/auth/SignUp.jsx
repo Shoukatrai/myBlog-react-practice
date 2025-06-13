@@ -1,11 +1,11 @@
 import Button from '@mui/material/Button';
 import { Stack, TextField, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { toastAlert } from '../../utils/toastAlert';
-import { useState } from "react"
+import { useState  } from "react"
 
 const SignUp = () => {
     const [fname, setFname] = useState("")
@@ -13,6 +13,8 @@ const SignUp = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+    
+    const navigate = useNavigate()
 
 
 
@@ -47,6 +49,7 @@ const SignUp = () => {
                 message: "Signuped Successfully!"
             })
             setIsLoading(false)
+            navigate("/")
         } catch (error) {
             console.log("error", error)
             toastAlert({

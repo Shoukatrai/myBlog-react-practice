@@ -1,26 +1,57 @@
 import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 import { Stack, TextField, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase';
+import { toastAlert } from '../../utils/toastAlert';
 
 
 const Login = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
-    const signUpHandler = async () => {
+    const loginHandler = async () => {
+        if (!email || !password) {
+            toastAlert({
+                type: "error",
+                message: "Please enter email and password."
+            });
+            return;
+        }
         try {
-            console.log(fname, contactNbr, email, password)
+            setIsLoading(true)
+            const user = await signInWithEmailAndPassword(auth, email, password);
+            console.log("user", user.user.uid)
+            localStorage.setItem("user", user.user.uid)
+            setIsLoading(false)
+            toastAlert({
+                type: "success",
+                message: "Login Successfull!"
+            })
+            navigate("/blogs")
         } catch (error) {
-
+            setIsLoading(false)
+            toastAlert({
+                type: "error",
+                message: error.message
+            })
         }
     }
 
 
     return (
         <>
-            <Stack padding={5} borderRadius={5} margin={"20px auto"} gap={4} width={"50%"} textAlign={"center"} sx={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px" }} >
-                <Typography variant='h4' >Welcome Back!</Typography>
+            <Stack  gap={4} textAlign={"center"} sx={{
+                boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px",
+                width: { xs: "100%", md: "50%" },
+                margin:{ xs: "30px 20px", md: "50px auto" },
+                borderRadius: "15px",
+                padding: "20px"
+            }} >
+                <Typography variant='h4'>Welcome Back!</Typography>
 
                 <TextField
                     variant='outlined'
@@ -41,7 +72,9 @@ const Login = () => {
                 > Don't have an Account!
                     <Link to={"/signup  "} >Create Account</Link>
                 </Typography>
-                <Button variant='contained' onClick={signUpHandler} >Login</Button>
+                <Button variant='contained' onClick={loginHandler} >
+                    {isLoading ? "Logging in" : "Login"}
+                </Button>
             </Stack>
         </>
     )
