@@ -5,9 +5,43 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { toastAlert } from '../utils/toastAlert';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const BlogCard = ({ blog }) => {
     const [isLogin, setIsLogin] = React.useState(false)
+
+    const editBlogHandler = async (id) => {
+        console.log("editBlogHandler", id)
+        try {
+            toastAlert({
+                type: "success",
+                message: "Working on Edit Blog Functionality!"
+            })
+        } catch (error) {
+            toastAlert({
+                type: "error",
+                message: error.message
+            })
+        }
+    }
+
+    const deleteBlogHandler = async (id) => {
+        console.log("deleteBlogHandler", id)
+        try {
+            await deleteDoc(doc(db, "blogs", id));
+            toastAlert({
+                type: "success",
+                message: "Blog Deleted!"
+            })
+        } catch (error) {
+            toastAlert({
+                type: "error",
+                message: error.message
+            })
+        }
+    }
 
     React.useEffect(() => {
         const user = localStorage.getItem("user")
@@ -47,8 +81,12 @@ const BlogCard = ({ blog }) => {
                 </Typography>
             </CardContent>
             {isLogin && <CardActions>
-                <Button size="small">Edit</Button>
-                <Button size="small">Delete</Button>
+                <Button size="small" onClick={() => {
+                    editBlogHandler(blog.id)
+                }} >Edit</Button>
+                <Button size="small" onClick={() => {
+                    deleteBlogHandler(blog.id)
+                }} >Delete</Button>
                 <Button size="small">Learn More</Button>
             </CardActions>
             }

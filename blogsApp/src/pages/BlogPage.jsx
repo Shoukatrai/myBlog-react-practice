@@ -32,7 +32,7 @@ const BlogPage = () => {
 
   useEffect(() => {
     fetchBlogs()
-  }, [])
+  }, [data.id])
 
 
 
