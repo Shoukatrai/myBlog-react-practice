@@ -7,6 +7,8 @@ import BlogPage from './pages/BlogPage'
 import { Bounce, ToastContainer } from 'react-toastify'
 import CreateBlog from './pages/CreateBlog'
 import MyBlogs from './pages/MyBlogs'
+import UserPrivateRoute from './Routes/userPrivateRoute'
+import AuthRoute from './Routes/AuthRoute'
 
 
 function App() {
@@ -14,11 +16,17 @@ function App() {
   return (
     <>
       <Routes>
-        <Route index element={<Login />} />
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/blogs' element={<BlogPage />} />
-        <Route path='/createblog' element={<CreateBlog />} />
-        <Route path='/myblogs' element={<MyBlogs />} />
+
+        <Route element ={<AuthRoute />} >
+          <Route index element={<Login />} />
+          <Route path='/signup' element={<SignUp />} />
+        </Route>
+
+        <Route element={<UserPrivateRoute />}>
+          <Route path='/blogs' element={<BlogPage />} />
+          <Route path='/createblog' element={<CreateBlog />} />
+          <Route path='/myblogs' element={<MyBlogs />} />
+        </Route>
       </Routes>
 
       <ToastContainer
