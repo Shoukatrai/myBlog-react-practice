@@ -3,7 +3,7 @@ import { Stack, TextField, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { toastAlert } from '../../utils/toastAlert';
 import { useState } from "react"
 
@@ -21,7 +21,7 @@ const SignUp = () => {
 
     const signUpHandler = async () => {
         try {
-            if(!email || !password || !fname || !contactNbr){
+            if (!email || !password || !fname || !contactNbr) {
                 toastAlert({
                     type: "warning",
                     message: "Fill All the Fields!"
@@ -37,16 +37,17 @@ const SignUp = () => {
 
             if (user) {
                 try {
-
+                    
                     const obj = {
                         fname,
                         contactNbr,
                         email,
-                        userId
+                        userId,
+                        type: "user",
+                        isActive: true,
                     }
-
-                    const docRef = await addDoc(collection(db, "users"), obj);
-                    console.log("docRef", docRef)
+                    const userInfo = await setDoc(doc(db, "users", userId), obj)
+                    console.log("userInfo" , userInfo)
                 } catch (error) {
                     console.log("error", error)
                 }
