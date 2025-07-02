@@ -3,8 +3,9 @@ import Button from '@mui/material/Button';
 import { Stack, TextField, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import { toastAlert } from '../../utils/toastAlert';
+import { doc, getDoc } from 'firebase/firestore';
 
 
 const Login = () => {
@@ -24,14 +25,36 @@ const Login = () => {
         try {
             setIsLoading(true)
             const user = await signInWithEmailAndPassword(auth, email, password);
-            console.log("user", user.user.uid)
-            localStorage.setItem("user", user.user.uid)
+            const uid = user.user.uid
+            const response = await getDoc(doc(db, "users", uid))
+            const userData = response.data()
+            console.log("user", userData)
+
+            if (!userData.isActive) {
+                toastAlert({
+                    type: "error",
+                    message: "Your account is not active!"
+                })
+                return
+            }
+
+            if(userData.type === "admin"){
+                navigate("/admin/dash")
+            }else{
+                navigate("/blogs")
+            }
+
+
+
+
+            localStorage.setItem("user", uid)
+            localStorage.setItem("userObj", JSON.stringify(userData))
+
             setIsLoading(false)
             toastAlert({
                 type: "success",
                 message: "Login Successfull!"
             })
-            navigate("/blogs")
         } catch (error) {
             setIsLoading(false)
             toastAlert({

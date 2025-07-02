@@ -9,6 +9,8 @@ import CreateBlog from './pages/CreateBlog'
 import MyBlogs from './pages/MyBlogs'
 import UserPrivateRoute from './Routes/userPrivateRoute'
 import AuthRoute from './Routes/AuthRoute'
+import AdminDash from './pages/Admin/AdminDash'
+import AdminRoutes from './Routes/AdminRoutes'
 
 
 function App() {
@@ -27,6 +29,11 @@ function App() {
           <Route path='/createblog' element={<CreateBlog />} />
           <Route path='/myblogs' element={<MyBlogs />} />
         </Route>
+
+        <Route element ={<AdminRoutes />}>
+          <Route path='/admin/dash' element={<AdminDash />} />
+        </Route>
+
       </Routes>
 
       <ToastContainer
