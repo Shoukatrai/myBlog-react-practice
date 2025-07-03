@@ -71,7 +71,7 @@ const MyBlogs = () => {
 
   useEffect(() => {
     fetchBlogs()
-  }, [])
+  }, [refresh])
 
 
   return (
@@ -85,7 +85,7 @@ const MyBlogs = () => {
           justifyContent: 'center',
           width: '100%',
         }}>
-          <CircularProgress size={"200px"} sx={{
+          <CircularProgress size={80} sx={{
             width: "100%",
             height: "100%",
             marginLeft: "auto",

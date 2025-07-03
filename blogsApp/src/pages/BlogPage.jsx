@@ -5,7 +5,7 @@ import { Box, CircularProgress, Stack } from '@mui/material'
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
 import { db } from '../firebase'
 import { toastAlert } from '../utils/toastAlert'
-import { Flag } from '@mui/icons-material'
+
 
 
 
@@ -23,9 +23,11 @@ const BlogPage = () => {
       setLoading(false)
       const tempArr = []
       res.forEach((doc) => {
-        console.log("doc", doc.data(), doc.id)
-        const obj = { ...doc.data(), id: doc.id }
-        tempArr.push(obj)
+        console.log("doc", doc.data().private, doc.id)
+        if(!doc.data().private ){
+          const obj = { ...doc.data(), id: doc.id }
+          tempArr.push(obj)
+        }
       })
       setData(tempArr)
     } catch (error) {
@@ -37,11 +39,15 @@ const BlogPage = () => {
     }
   }
 
-
-
   useEffect(() => {
     fetchBlogs()
   }, [refresh])
+
+  useEffect(() => {
+    if (data.length > 0) {
+      console.log("data", data[0].userId)
+    }
+  }, [data])
 
 
   const deleteBlogHandler = async (id) => {
@@ -88,7 +94,7 @@ const BlogPage = () => {
           justifyContent: 'center',
           width: '100%',
         }}>
-          <CircularProgress size={"200px"} sx={{
+          <CircularProgress size={80} sx={{
             width: "100%",
             height: "100%",
             marginLeft: "auto",

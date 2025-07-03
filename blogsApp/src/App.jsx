@@ -11,6 +11,7 @@ import UserPrivateRoute from './Routes/userPrivateRoute'
 import AuthRoute from './Routes/AuthRoute'
 import AdminDash from './pages/Admin/AdminDash'
 import AdminRoutes from './Routes/AdminRoutes'
+import FullBlog from './pages/FullBlog'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path='/blogs' element={<BlogPage />} />
           <Route path='/createblog' element={<CreateBlog />} />
           <Route path='/myblogs' element={<MyBlogs />} />
+          <Route path='/blog/:id' element={<FullBlog />} /> 
         </Route>
 
         <Route element ={<AdminRoutes />}>

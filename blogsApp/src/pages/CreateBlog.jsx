@@ -74,7 +74,7 @@ const CreateBlog = () => {
         <>
             <Navbar />
             <Stack gap={4} margin={"20px auto"} width={"50%"} sx={{
-                width: { xs: "100%", md: "50%" }
+                width: { xs: "95%", md: "50%" }
             }} textAlign={"center"}  >
                 <Typography variant='h4' >Create Blog</Typography>
                 <TextField variant='outlined' label={"Blog Title"}

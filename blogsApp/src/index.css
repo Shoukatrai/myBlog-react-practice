@@ -8,13 +8,19 @@
     text-decoration: none;
 }
 .link:hover{
-    text-decoration: underline;
+    font-weight: bold;
 }
 
 .Reslink{
     color: blue;
     text-decoration: none;
+    text-align: center;
 }
 .Reslink:hover{
-    text-decoration: underline;
+    font-weight: bold;
+}
+
+.login-Link{
+    color: blue;
+    text-decoration: solid;
 }

@@ -100,36 +100,36 @@ const Navbar = () => {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                                    <Typography sx={{ textAlign: 'center' }}>
-
+                                    <Typography key={page.title} sx={{ textAlign: 'center' }}>
                                         <Link className='Reslink' to={page.url}>
                                             {page.title}
                                         </Link>
-
                                     </Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
                     <CreateIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href="#app-bar-with-responsive-menu"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography>
+                    <Link to={"/blogs"} className='link'>
+                        <Typography
+                            variant="h5"
+                            noWrap
+                            component="h6"
+                            href="#app-bar-with-responsive-menu"
+                            sx={{
+                                mr: 2,
+                                display: { xs: 'flex', md: 'none' },
+                                flexGrow: 1,
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            MyBlogsApp
+                        </Typography>
+                    </Link>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
@@ -137,7 +137,9 @@ const Navbar = () => {
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <Link className='link' to={page.url} >{page.title}</Link>
+                                <Link className='link' to={page.url}  >
+                                    {page.title}
+                                </Link>
                             </Button>
                         ))}
                     </Box>

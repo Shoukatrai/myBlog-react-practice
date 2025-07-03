@@ -109,9 +109,9 @@ const SignUp = () => {
                     onChange={(e) => { setPassword(e.target.value) }}
                 ></TextField>
                 <Typography variant='body1'
-                    sx={{ display: "flex", gap: "7px", alignItems: " center", justifyContent: "center" }}
+                    sx={{ display: "flex", gap: "3px", alignItems: " center", justifyContent: "center" }}
                 >Have an Account!
-                    <Link to={"/"} >Login</Link>
+                    <Link to={"/"} className='login-Link'>Login</Link>
                 </Typography>
                 <Button variant='contained' onClick={signUpHandler}>
                     {isLoading ? "Creating Account..." : "Create Account "}
