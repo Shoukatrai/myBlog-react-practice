@@ -17,6 +17,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import BookIcon from '@mui/icons-material/Book';
 
 const drawerWidth = 240;
 
@@ -46,16 +48,16 @@ function AdminLayout(props) {
             <Divider />
             <List>
                 {[
-                    { name: "Dashboard", url: "/admin/dashboard" },
+                    { name: "Dashboard", url: "/admin/dash" },
                     { name: "Blogs", url: "/admin/blogs" },
                     { name: "Users", url: "/admin/users" },
-                    { name: "Profile", url: "/admin/profile" }
+                    { name: "Profile", url: "/admin/profile"}
                 ].map((obj, index) => (
                     <ListItem key={obj.name} disablePadding>
                         <Link to={obj.url} >
                             <ListItemButton>
                                 <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    {index % 2 === 0 ? <DashboardIcon /> : <BookIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={obj.name} />
                             </ListItemButton>
