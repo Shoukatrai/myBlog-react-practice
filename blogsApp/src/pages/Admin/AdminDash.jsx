@@ -1,12 +1,12 @@
 import React from 'react'
-import AdminLayout from '../../components/AdminLayout'
+import DashboardLayoutAccount from '../../components/AdminLayout'
 
 const AdminDash = () => {
   return (
     <div>
-      <AdminLayout>
+      <DashboardLayoutAccount>
         <h1>Admin Dashboard</h1>
-      </AdminLayout>
+      </DashboardLayoutAccount>
     </div>
   )
 }

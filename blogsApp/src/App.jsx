@@ -10,8 +10,13 @@ import MyBlogs from './pages/MyBlogs'
 import UserPrivateRoute from './Routes/userPrivateRoute'
 import AuthRoute from './Routes/AuthRoute'
 import AdminDash from './pages/Admin/AdminDash'
+import AdminProfile from './pages/Admin/AdminProfile'
 import AdminRoutes from './Routes/AdminRoutes'
 import FullBlog from './pages/FullBlog'
+import Profile from './pages/Profile'
+import Logout from './pages/Logout'
+import Blogs from './pages/Admin/Blogs'
+import Users from './pages/Admin/Users'
 
 
 function App() {
@@ -30,10 +35,15 @@ function App() {
           <Route path='/createblog' element={<CreateBlog />} />
           <Route path='/myblogs' element={<MyBlogs />} />
           <Route path='/blog/:id' element={<FullBlog />} /> 
+          <Route path='/profile' element={<Profile />} /> 
+          <Route path='/logout' element={<Logout />} /> 
         </Route>
 
         <Route element ={<AdminRoutes />}>
           <Route path='/admin/dash' element={<AdminDash />} />
+          <Route path='/admin/profile' element={<AdminProfile />} />
+          <Route path='/admin/blogs' element={<Blogs />} />
+          <Route path='/admin/users' element={<Users />} />
         </Route>
 
       </Routes>

@@ -26,7 +26,13 @@ const pages = [{
     title: "Create Blogs",
     url: "/createblog"
 }];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [{
+    title : "Profile",
+    url :"/profile"
+},  {
+    title :"Logout",
+    url: "/logout"
+}];
 
 const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -166,8 +172,10 @@ const Navbar = () => {
                             onClose={handleCloseUserMenu}
                         >
                             {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                                <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                                    <Link to={setting.url}>
+                                    <Typography sx={{ textAlign: 'center' }}>{setting.title}</Typography>
+                                    </Link>
                                 </MenuItem>
                             ))}
                         </Menu>

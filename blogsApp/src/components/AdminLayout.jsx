@@ -48,7 +48,8 @@ function AdminLayout(props) {
                 {[
                     { name: "Dashboard", url: "/admin/dashboard" },
                     { name: "Blogs", url: "/admin/blogs" },
-                    { name: "Users", url: "/admin/users" }
+                    { name: "Users", url: "/admin/users" },
+                    { name: "Profile", url: "/admin/profile" }
                 ].map((obj, index) => (
                     <ListItem key={obj.name} disablePadding>
                         <Link to={obj.url} >
